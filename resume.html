@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kimathi Grace Muthoni - Professional Resume</title>
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    
+    <style>
+        :root {
+            --primary: #0F172A;
+            --secondary: #475569;
+            --accent: #0D9488;
+            --accent-light: #F0FDFA;
+            --text-main: #1E293B;
+            --text-light: #64748B;
+            --border: #E2E8F0;
+            --bg-light: #F8FAFC;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text-main);
+            background-color: var(--bg-light);
+            line-height: 1.5;
+            padding: 40px 20px;
+        }
+
+        .resume-container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: #FFFFFF;
+            padding: 50px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            border: 1px solid var(--border);
+            position: relative;
+        }
+
+        /* Toolbar Actions */
+        .resume-actions {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            gap: 12px;
+        }
+
+        .btn-action {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background: #FFFFFF;
+            border: 1px solid var(--border);
+            color: var(--secondary);
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 600;
+            border-radius: 6px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+
+        .btn-action:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            background: var(--accent-light);
+            transform: translateY(-1px);
+        }
+
+        .btn-print {
+            background: var(--accent);
+            color: #FFFFFF;
+            border-color: var(--accent);
+        }
+
+        .btn-print:hover {
+            background: #0F766E;
+            color: #FFFFFF;
+        }
+
+        /* Header Layout */
+        .resume-header {
+            border-bottom: 2px solid var(--primary);
+            padding-bottom: 24px;
+            margin-bottom: 30px;
+        }
+
+        .name-title h1 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--primary);
+            letter-spacing: -0.02em;
+            margin-bottom: 4px;
+        }
+
+        .name-title .title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 12px;
+            margin-top: 16px;
+            font-size: 0.9rem;
+            color: var(--secondary);
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .contact-item a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .contact-item a:hover {
+            color: var(--accent);
+        }
+
+        /* Two Column Layout */
+        .resume-body {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 32px;
+        }
+
+        /* Section styles */
+        .resume-section {
+            margin-bottom: 28px;
+        }
+
+        .section-heading {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 6px;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .section-heading i {
+            color: var(--accent);
+            font-size: 1.1rem;
+        }
+
+        .summary-text {
+            font-size: 0.95rem;
+            color: var(--secondary);
+            line-height: 1.6;
+            text-align: justify;
+        }
+
+        /* Experience Elements */
+        .experience-item {
+            margin-bottom: 20px;
+        }
+
+        .experience-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            flex-wrap: wrap;
+            margin-bottom: 6px;
+        }
+
+        .experience-header h3 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .experience-header .date {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--accent);
+            background: var(--accent-light);
+            padding: 2px 8px;
+            border-radius: 4px;
+        }
+
+        .company-loc {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--secondary);
+            margin-bottom: 8px;
+        }
+
+        .experience-desc {
+            font-size: 0.92rem;
+            color: var(--secondary);
+            line-height: 1.55;
+            list-style-type: square;
+            margin-left: 20px;
+        }
+
+        .experience-desc li {
+            margin-bottom: 6px;
+        }
+
+        /* Skills Structure */
+        .skills-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .skill-group h4 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .skill-tag {
+            font-size: 0.8rem;
+            font-weight: 600;
+            background: var(--bg-light);
+            color: var(--secondary);
+            border: 1px solid var(--border);
+            padding: 4px 10px;
+            border-radius: 4px;
+        }
+
+        /* Projects Section */
+        .project-item {
+            margin-bottom: 20px;
+        }
+
+        .project-item h3 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 4px;
+        }
+
+        .project-meta {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--accent);
+            margin-bottom: 8px;
+        }
+
+        .project-desc {
+            font-size: 0.9rem;
+            color: var(--secondary);
+            margin-bottom: 8px;
+        }
+
+        .project-impact {
+            background: var(--bg-light);
+            border-left: 3px solid var(--accent);
+            padding: 8px 12px;
+            border-radius: 0 4px 4px 0;
+            font-size: 0.85rem;
+            color: var(--text-main);
+            font-style: italic;
+        }
+
+        /* Education & Credentials */
+        .edu-cert-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 32px;
+        }
+
+        .edu-item h3 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 2px;
+        }
+
+        .edu-item .school {
+            font-size: 0.9rem;
+            color: var(--secondary);
+            font-weight: 500;
+            margin-bottom: 4px;
+        }
+
+        .edu-item .date {
+            font-size: 0.85rem;
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        .cert-list-item {
+            font-size: 0.9rem;
+            color: var(--secondary);
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .cert-list-item i {
+            color: var(--accent);
+            font-size: 0.8rem;
+        }
+
+        /* Print Override styles */
+        @media print {
+            body {
+                background: #FFFFFF;
+                padding: 0;
+                color: #000000;
+            }
+            .resume-container {
+                box-shadow: none;
+                border: none;
+                padding: 0;
+                max-width: 100%;
+            }
+            .resume-actions {
+                display: none; /* Hide interactive buttons in print */
+            }
+            .btn-action {
+                display: none !important;
+            }
+            .experience-header .date {
+                background: transparent;
+                border: none;
+                padding: 0;
+                color: #000000;
+                font-weight: bold;
+            }
+            .project-impact {
+                background: transparent;
+                border-left: 2px solid #000000;
+            }
+        }
+
+        /* Responsiveness */
+        @media (max-width: 768px) {
+            .resume-container {
+                padding: 30px 20px;
+            }
+            .resume-actions {
+                position: relative;
+                top: 0;
+                right: 0;
+                margin-bottom: 20px;
+                justify-content: flex-end;
+            }
+            .skills-container {
+                grid-template-columns: 1fr;
+            }
+            .edu-cert-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="resume-container">
+        
+        <!-- Interactive Tool Buttons -->
+        <div class="resume-actions">
+            <a href="index.html" class="btn-action"><i class="fa-solid fa-arrow-left"></i> Portfolio</a>
+            <button onclick="window.print()" class="btn-action btn-print"><i class="fa-solid fa-print"></i> Print CV</button>
+        </div>
+        
+        <!-- Header -->
+        <header class="resume-header">
+            <div class="name-title">
+                <h1>Kimathi Grace Muthoni</h1>
+                <div class="title">Data Analyst | Business Intelligence Analyst</div>
+            </div>
+            
+            <div class="contact-grid">
+                <div class="contact-item">
+                    <i class="fa-solid fa-envelope"></i>
+                    <a href="mailto:muthonigeekimathi@gmail.com">muthonigeekimathi@gmail.com</a>
+                </div>
+                <div class="contact-item">
+                    <i class="fa-solid fa-phone"></i>
+                    <a href="tel:+254759717761">0759717761</a>
+                </div>
+                <div class="contact-item">
+                    <i class="fa-solid fa-location-dot"></i>
+                    <span>Kenya</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fa-brands fa-linkedin"></i>
+                    <a href="https://www.linkedin.com/in/grace-kimathi-33755a3b2/" target="_blank">LinkedIn Profile</a>
+                </div>
+                <div class="contact-item">
+                    <i class="fa-brands fa-github"></i>
+                    <a href="https://github.com/muthoni7" target="_blank">github.com/muthoni7</a>
+                </div>
+            </div>
+        </header>
+
+        <div class="resume-body">
+            
+            <!-- Professional Summary -->
+            <section class="resume-section">
+                <h2 class="section-heading"><i class="fa-solid fa-user"></i> Professional Summary</h2>
+                <p class="summary-text">
+                    Analytical and detail-oriented Data Analyst with a strong background in extracting, cleaning, and transforming complex, unstructured datasets into high-fidelity business intelligence dashboards. Proficient in database querying (SQL), programming & predictive modeling (Python, R), and visual analytics (Tableau, Power BI, Advanced Excel). Skilled in bridging technical statistics with core corporate objectives, providing managers with actionable metrics that optimize revenue cycles, reduce operation overheads, and drive growth.
+                </p>
+            </section>
+
+            <!-- Technical & Workplace Skills -->
+            <section class="resume-section">
+                <h2 class="section-heading"><i class="fa-solid fa-gears"></i> Core Skills Spectrum</h2>
+                <div class="skills-container">
+                    
+                    <div class="skill-group">
+                        <h4>Databases & Programming</h4>
+                        <div class="skill-tags">
+                            <span class="skill-tag">SQL (PostgreSQL / MySQL)</span>
+                            <span class="skill-tag">Python (Pandas, Numpy)</span>
+                            <span class="skill-tag">R Programming</span>
+                            <span class="skill-tag">Git & GitHub</span>
+                            <span class="skill-tag">ETL & Data Cleaning</span>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-group">
+                        <h4>Visualizations & Stats</h4>
+                        <div class="skill-tags">
+                            <span class="skill-tag">Tableau</span>
+                            <span class="skill-tag">Power BI</span>
+                            <span class="skill-tag">Microsoft Excel</span>
+                            <span class="skill-tag">Statistics & Mathematics</span>
+                            <span class="skill-tag">Machine Learning</span>
+                        </div>
+                    </div>
+
+                    <div class="skill-group" style="grid-column: 1 / -1;">
+                        <h4>Workplace Skills</h4>
+                        <div class="skill-tags">
+                            <span class="skill-tag">Data Storytelling</span>
+                            <span class="skill-tag">Critical Thinking</span>
+                            <span class="skill-tag">Business Acumen</span>
+                            <span class="skill-tag">Problem Solving</span>
+                            <span class="skill-tag">AI Prompt Engineering</span>
+                            <span class="skill-tag">Transparent Communication</span>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- Work Experience -->
+            <section class="resume-section">
+                <h2 class="section-heading"><i class="fa-solid fa-briefcase"></i> Work Experience</h2>
+                
+                <div class="experience-item">
+                    <div class="experience-header">
+                        <h3>Freelance Data Analyst</h3>
+                        <span class="date">2025 - PRESENT</span>
+                    </div>
+                    <div class="company-loc">Independent Consultant | Kenya</div>
+                    <ul class="experience-desc">
+                        <li>Consult with small and medium business owners to automate routine sales and financial reporting pipelines.</li>
+                        <li>Formulate complex SQL queries to clean, structure, and extract transactional datasets.</li>
+                        <li>Deploy dynamic Tableau and Power BI dashboards, decreasing reporting delay parameters by 40%.</li>
+                        <li>Translate deep analytical anomalies into non-technical corporate action matrices for executive leadership.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Selected Projects -->
+            <section class="resume-section">
+                <h2 class="section-heading"><i class="fa-solid fa-chart-line"></i> Selected Projects</h2>
+                
+                <div class="project-item">
+                    <h3>E-Commerce Data Analysis & Machine Learning Pipeline</h3>
+                    <div class="project-meta">Technologies: Python, Pandas, Scikit-Learn, Matplotlib, Seaborn</div>
+                    <p class="project-desc">Analyzed over 1,000 retail transactions to uncover purchase behaviors and identify high-value customer clusters. Developed regularized regression and classification ML models to predict customer purchasing frequencies.</p>
+                    <div class="project-impact">
+                        <strong>Business Outcome:</strong> Formulated a targeted discount logic showing that an optimized 15% promotional campaign would lift sales volumes by 12% while maintaining unit margins. Predictive accuracy reached 92%.
+                    </div>
+                </div>
+                
+                <div class="project-item">
+                    <h3>Predicting House Prices using EDA & Regression</h3>
+                    <div class="project-meta">Technologies: Python, Ridge/Lasso Regression, Exploratory Analysis, Statsmodels</div>
+                    <p class="project-desc">Conducted comprehensive data audit and predictive modeling on residential house pricing patterns in Ames, Iowa, analyzing 80 distinct environmental and architectural variables.</p>
+                    <div class="project-impact">
+                        <strong>Business Outcome:</strong> Identified top 5 value-drivers. Models predicted transaction prices with an R² of 0.89, giving property developers accurate pricing benchmarks to reduce asset listing hold periods.
+                    </div>
+                </div>
+
+                <div class="project-item">
+                    <h3>Telecom Churn BI Dashboard & SQL Analysis</h3>
+                    <div class="project-meta">Technologies: SQL (PostgreSQL), Power BI, Data Wrangling</div>
+                    <p class="project-desc">Structured churn forecasting dashboard connecting PostgreSQL data views to Power BI interface.</p>
+                    <div class="project-impact">
+                        <strong>Business Outcome:</strong> Uncovered high-risk account profiles (60% month-to-month fiber optic contracts), producing target metrics projected to lower subscriber attrition rates by 18%.
+                    </div>
+                </div>
+            </section>
+
+
+        </div>
+    </div>
+
+</body>
+</html>
