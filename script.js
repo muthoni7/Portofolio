@@ -519,9 +519,29 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         if (isFormValid) {
-            // Trigger simulated success visual
-            successPopup.classList.add('active');
-            contactForm.reset();
+            // Construct mailto link with form data
+            const name = formName.value.trim();
+            const email = formEmail.value.trim();
+            const subject = formSubject.value.trim();
+            const message = formMessage.value.trim();
+
+            const mailBody = `Hello Kimathi Grace Muthoni,\r\n\r\nMy name is ${name} (${email}).\r\n\r\n${message}\r\n\r\nBest regards,\r\n${name}`;
+            const mailtoLink = `mailto:muthonigeekimathi@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(mailBody)}`;
+
+            // Create a temporary anchor and click it to open email client
+            const tempLink = document.createElement('a');
+            tempLink.href = mailtoLink;
+            tempLink.target = '_blank';
+            tempLink.rel = 'noopener noreferrer';
+            document.body.appendChild(tempLink);
+            tempLink.click();
+            document.body.removeChild(tempLink);
+
+            // Show success popup and reset form after a short delay
+            setTimeout(() => {
+                successPopup.classList.add('active');
+                contactForm.reset();
+            }, 300);
         }
     });
 
