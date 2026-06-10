@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
     themeToggle.addEventListener('click', () => {
         const activeTheme = document.documentElement.getAttribute('data-theme');
         const newTheme = activeTheme === 'dark' ? 'light' : 'dark';
-        
+
         document.documentElement.setAttribute('data-theme', newTheme);
         localStorage.setItem('theme', newTheme);
         updateThemeIcon(newTheme);
@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function typeEffect() {
         const currentWord = words[wordIndex];
-        
+
         if (isDeleting) {
             typewriterEl.textContent = currentWord.substring(0, charIndex - 1);
             charIndex--;
@@ -151,7 +151,7 @@ document.addEventListener('DOMContentLoaded', () => {
     /* ==========================================================================
        4. INTERSECTION OBSERVER ANIMATIONS (SKILLS, COUNTERS, REVEALS)
        ========================================================================== */
-    
+
     // Scroll Reveal trigger
     const revealElements = document.querySelectorAll('.reveal');
     const revealObserver = new IntersectionObserver((entries, observer) => {
@@ -207,12 +207,12 @@ document.addEventListener('DOMContentLoaded', () => {
     function animateCount(element, endVal, decimals, suffix) {
         let startTimestamp = null;
         const duration = 2000; // 2 seconds animation
-        
+
         function step(timestamp) {
             if (!startTimestamp) startTimestamp = timestamp;
             const progress = Math.min((timestamp - startTimestamp) / duration, 1);
             const currentVal = progress * endVal;
-            
+
             if (decimals > 0) {
                 element.textContent = currentVal.toFixed(decimals) + suffix;
             } else {
@@ -264,7 +264,7 @@ document.addEventListener('DOMContentLoaded', () => {
        6. GITHUB PROJECTS INTEGRATION (LIVE API + RICH LOCAL ENRICHMENT)
        ========================================================================== */
     const projectsGrid = document.getElementById('projectsGrid');
-    
+
     // Detailed local configurations for candidate repositories
     const projectConfigs = {
         'E-commerce-project': {
@@ -323,12 +323,12 @@ document.addEventListener('DOMContentLoaded', () => {
         try {
             const response = await fetch('https://api.github.com/users/muthoni7/repos');
             if (!response.ok) throw new Error('API Rate limits exceeded');
-            
+
             const repos = await response.json();
-            
+
             // Map the API results to our enriched configs
             const renderedProjects = [];
-            
+
             repos.forEach(repo => {
                 const config = projectConfigs[repo.name];
                 if (config) {
@@ -354,18 +354,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function renderProjectCards(projects) {
         projectsGrid.innerHTML = ''; // Clear fallback template
-        
+
         projects.forEach(proj => {
             const card = document.createElement('article');
             card.className = 'project-card glass-card';
             card.setAttribute('data-categories', proj.categories.join(','));
-            
+
             // Construct visual indicators
             const tagSpans = proj.tags.map(t => `<span class="project-tag">${t}</span>`).join('');
             const barDivs = proj.bars.map(h => `<div class="project-preview-bar" style="height: ${h}%;"></div>`).join('');
-            
+
             const codeLines = proj.previewCode.split('\n').map(l => `<span>${escapeHTML(l)}</span>`).join('');
-            
+
             card.innerHTML = `
                 <div class="project-preview">
                     ${proj.image ? `<img src="${proj.image}" alt="${proj.name}" class="project-img">` : ''}
@@ -407,7 +407,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function escapeHTML(str) {
-        return str.replace(/[&<>'"]/g, 
+        return str.replace(/[&<>'"]/g,
             tag => ({
                 '&': '&amp;',
                 '<': '&lt;',
@@ -435,7 +435,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 projectCards.forEach(card => {
                     const categories = card.getAttribute('data-categories').split(',');
-                    
+
                     if (filter === 'all' || categories.includes(filter)) {
                         card.style.display = 'flex';
                         // Add fade-in transition
@@ -465,13 +465,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const contactForm = document.getElementById('contactForm');
     const successPopup = document.getElementById('successPopup');
     const closePopupBtn = document.getElementById('closePopupBtn');
-    
+
     // Inputs & Error Indicators
     const formName = document.getElementById('form-name');
     const formEmail = document.getElementById('form-email');
     const formSubject = document.getElementById('form-subject');
     const formMessage = document.getElementById('form-message');
-    
+
     const errorName = document.getElementById('error-name');
     const errorEmail = document.getElementById('error-email');
     const errorSubject = document.getElementById('error-subject');
@@ -503,7 +503,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Form submit validation
     contactForm.addEventListener('submit', (e) => {
         e.preventDefault();
-        
+
         let isFormValid = true;
 
         inputs.forEach(item => {
@@ -519,29 +519,60 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         if (isFormValid) {
-            // Construct mailto link with form data
-            const name = formName.value.trim();
-            const email = formEmail.value.trim();
-            const subject = formSubject.value.trim();
-            const message = formMessage.value.trim();
 
-            const mailBody = `Hello Kimathi Grace Muthoni,\r\n\r\nMy name is ${name} (${email}).\r\n\r\n${message}\r\n\r\nBest regards,\r\n${name}`;
-            const mailtoLink = `mailto:muthonigeekimathi@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(mailBody)}`;
+            const submitBtn = contactForm.querySelector("button[type='submit']");
+            submitBtn.disabled = true;
+            submitBtn.innerHTML =
+                '<i class="fa-solid fa-spinner fa-spin"></i> Sending...';
 
-            // Create a temporary anchor and click it to open email client
-            const tempLink = document.createElement('a');
-            tempLink.href = mailtoLink;
-            tempLink.target = '_blank';
-            tempLink.rel = 'noopener noreferrer';
-            document.body.appendChild(tempLink);
-            tempLink.click();
-            document.body.removeChild(tempLink);
+            const formData = new FormData(contactForm);
 
-            // Show success popup and reset form after a short delay
-            setTimeout(() => {
-                successPopup.classList.add('active');
-                contactForm.reset();
-            }, 300);
+            formData.append(
+                "project_subject",
+                formSubject.value.trim()
+            );
+
+            fetch("https://api.web3forms.com/submit", {
+                method: "POST",
+                body: formData
+            })
+                .then(async (response) => {
+
+                    const result = await response.json();
+
+                    if (result.success) {
+
+                        successPopup.classList.add("active");
+
+                        contactForm.reset();
+
+                    } else {
+
+                        alert(
+                            "Message could not be sent. Please try again."
+                        );
+
+                        console.error(result);
+
+                    }
+
+                })
+                .catch(error => {
+
+                    console.error(error);
+
+                    alert(
+                        "Network error. Please try again later."
+                    );
+
+                })
+                .finally(() => {
+
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML =
+                        '<i class="fa-regular fa-paper-plane"></i> Send Message';
+
+                });
         }
     });
 
